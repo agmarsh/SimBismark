@@ -20,8 +20,8 @@ summary(D)
 
 s <- ggplot(data=D, aes(x=ObsMet, y=ExpMet) ) +
  	 geom_point(aes(colour=ExpMet), size=3, alpha=1) +
- 	 scale_x_continuous("Bismark %MET") +
- 	 scale_y_continuous("Expected %MET") +
+ 	 scale_x_continuous("Expected %MET") +
+ 	 scale_y_continuous("Bismark %MET") +
  	 #geom_text(label=D$POS,size=2, hjust=0,vjust=0) +
  	 #stat_smooth(method="lm", colour="red3", fill="grey20", size=0.5, alpha=0.5, formula = y ~ x) +
  	 labs(title=paste(PlotTag2,": Bismark Scoring")) +
@@ -41,10 +41,6 @@ u <- ggplot(data=D, aes(x=ObsMet)) +
 	labs(title="Bismark %MET Distribution", x="%MET Calls", y="Count")
 u
 ggsave(u, file=paste(workFolder,PlotTag1,"-",PlotTag2,"/","Rplot-pMET-distribution.png",sep=''), dpi=300)
-
-
-
-
 
 
 # MODEL REGRESSION --------------------------------------------------------------------------
@@ -69,7 +65,7 @@ u <- ggplot(data=D, aes(x=Dev)) +
 	geom_text(label=paste("Mean = ",mErr, "%",sep=""), x=mErr+1,y=110,hjust=0,colour="gray40") +
 	labs(title="%Error Distribution", x="CpG[i] %Error", y="Error Count")
 #u
-ggsave(u, file="Rplot-SimMethyl-ErrorDist.png",dpi=300)
+ggsave(u, file=paste(workFolder,PlotTag1,"-",PlotTag2,"/","Rplot-SimMethyl-ErrorDist.png",sep=''), dpi=300)
 
 
 #w <- ggplot(data=D, aes(x=ExpMet,y=ObsMet)) +
@@ -80,7 +76,7 @@ ggsave(u, file="Rplot-SimMethyl-ErrorDist.png",dpi=300)
 #	geom_text(label="(1:1)", x=67, y=75, colour="red4")
 #	#stat_smooth(method="lm", colour="red3", fill="grey40", size=1, alpha=0.5, formula = y ~ x) 
 ##w
-#ggsave(w, file="Rplot-SimMethyl-OBS-vs-EXP.png",dpi=300)
+#ggsave(w, file=paste(workFolder,PlotTag1,"-",PlotTag2,"/","Rplot-SimMethyl-OBS-vs-EXP.png",dpi=300)
 
 
 
