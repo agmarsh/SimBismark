@@ -1,0 +1,154 @@
+library(ggplot2)
+D <- read.table(paste(workFolder,PlotTag1,"-",PlotTag2,"/SimMethylScoreTable-01-CpG-",PlotTag2,".txt",sep=''),sep='\t',header=T) #
+summary(D)
+PlotTag1 <- c("01")#
+PlotTag2 <- c("0706")#
+workFolder <- c("002-Bismark/")#
+#
+D <- read.table(paste(workFolder,PlotTag1,"-",PlotTag2,"/SimMethylScoreTable-01-CpG-",PlotTag2,".txt",sep=''),sep='\t',header=T) #
+summary(D)
+s <- ggplot(data=D, aes(x=ExpMet, y=ObsMet) ) +#
+ 	 geom_point(aes(colour=GPscore), size=3, alpha=1) +#
+ 	 scale_x_continuous("Expected %MET") +#
+ 	 scale_y_continuous("Bismark %MET") +#
+ 	 #geom_text(label=D$POS,size=2, hjust=0,vjust=0) +#
+ 	 #stat_smooth(method="lm", colour="red3", fill="grey20", size=0.5, alpha=0.5, formula = y ~ x) +#
+ 	 labs(title=paste(PlotTag2,": Bismark Scoring")) +#
+ 	 scale_colour_gradient("Expected %MET",low="orange", high="blue")#
+ 	 #facet_wrap(~GRP,scales="free_x")#
+ 	 # geom_text(data=eq,aes(x = 25, y = 300,label=V1), parse = TRUE, inherit.aes=FALSE)#
+s
+s <- ggplot(data=D, aes(x=ExpMet, y=ObsMet) ) +#
+ 	 geom_point(aes(colour=ExpMet), size=3, alpha=1) +#
+ 	 scale_x_continuous("Expected %MET") +#
+ 	 scale_y_continuous("Bismark %MET") +#
+ 	 #geom_text(label=D$POS,size=2, hjust=0,vjust=0) +#
+ 	 #stat_smooth(method="lm", colour="red3", fill="grey20", size=0.5, alpha=0.5, formula = y ~ x) +#
+ 	 labs(title=paste(PlotTag2,": Bismark Scoring")) +#
+ 	 scale_colour_gradient("Expected %MET",low="orange", high="blue")#
+ 	 #facet_wrap(~GRP,scales="free_x")#
+ 	 # geom_text(data=eq,aes(x = 25, y = 300,label=V1), parse = TRUE, inherit.aes=FALSE)#
+s
+ggsave(s, file=paste(workFolder,PlotTag1,"-",PlotTag2,"/","Rplot-Exp-Obs-Bismark.png",sep=''), dpi=300)
+s <- ggplot(data=D, aes(x=ObsMet, y=ExpMet) ) +#
+ 	 geom_point(aes(colour=ExpMet), size=3, alpha=1) +#
+ 	 scale_x_continuous("Expected %MET") +#
+ 	 scale_y_continuous("Bismark %MET") +#
+ 	 #geom_text(label=D$POS,size=2, hjust=0,vjust=0) +#
+ 	 #stat_smooth(method="lm", colour="red3", fill="grey20", size=0.5, alpha=0.5, formula = y ~ x) +#
+ 	 labs(title=paste(PlotTag2,": Bismark Scoring")) +#
+ 	 scale_colour_gradient("Expected %MET",low="orange", high="blue")#
+ 	 #facet_wrap(~GRP,scales="free_x")#
+ 	 # geom_text(data=eq,aes(x = 25, y = 300,label=V1), parse = TRUE, inherit.aes=FALSE)#
+s#
+#
+ggsave(s, file=paste(workFolder,PlotTag1,"-",PlotTag2,"/","Rplot-Exp-Obs-Bismark.png",sep=''), dpi=300)
+s <- ggplot(data=D, aes(x=ObsMet, y=ExpMet) ) +#
+ 	 geom_point(aes(colour=ExpMet), size=3, alpha=1) +#
+ 	 scale_x_continuous("Bismark %MET") +#
+ 	 scale_y_continuous("Expected %MET") +#
+ 	 #geom_text(label=D$POS,size=2, hjust=0,vjust=0) +#
+ 	 #stat_smooth(method="lm", colour="red3", fill="grey20", size=0.5, alpha=0.5, formula = y ~ x) +#
+ 	 labs(title=paste(PlotTag2,": Bismark Scoring")) +#
+ 	 scale_colour_gradient("Expected %MET",low="orange", high="blue")#
+ 	 #facet_wrap(~GRP,scales="free_x")#
+ 	 # geom_text(data=eq,aes(x = 25, y = 300,label=V1), parse = TRUE, inherit.aes=FALSE)#
+s
+ggsave(s, file=paste(workFolder,PlotTag1,"-",PlotTag2,"/","Rplot-Exp-Obs-Bismark.png",sep=''), dpi=300)
+u <- ggplot(data=D, aes(x=ObsMet)) +#
+	geom_histogram(colour="blue4", fill="green3", binwidth= 1) +#
+	scale_x_continuous(limits=c(0,100)) +#
+	#geom_vline(x=mErr, colour="blue4", size=2, alpha=0.4) +#
+	labs(title="Bismark %MET Distribution", x="%MET Calls", y="Count")#
+u
+u <- ggplot(data=D, aes(x=ObsMet)) +#
+	geom_histogram(stat='identiy',colour="blue4", fill="green3", binwidth= 1) +#
+	scale_x_continuous(limits=c(0,100)) +#
+	#geom_vline(x=mErr, colour="blue4", size=2, alpha=0.4) +#
+	labs(title="Bismark %MET Distribution", x="%MET Calls", y="Count")#
+u
+u <- ggplot(data=D, aes(x=ObsMet)) +#
+	geom_histogram(stat='identity',colour="blue4", fill="green3", binwidth= 1) +#
+	scale_x_continuous(limits=c(0,100)) +#
+	#geom_vline(x=mErr, colour="blue4", size=2, alpha=0.4) +#
+	labs(title="Bismark %MET Distribution", x="%MET Calls", y="Count")#
+u
+u <- ggplot(data=D, aes(x=ObsMet)) +#
+	geom_histogram(stat='density',colour="blue4", fill="green3", binwidth= 1) +#
+	scale_x_continuous(limits=c(0,100)) +#
+	#geom_vline(x=mErr, colour="blue4", size=2, alpha=0.4) +#
+	labs(title="Bismark %MET Distribution", x="%MET Calls", y="Count")#
+u
+u <- ggplot(data=D, aes(x=ObsMet)) +#
+	geom_histogram(colour="blue4", fill="green3", binwidth= 2) +#
+	scale_x_continuous(limits=c(0,100)) +#
+	#geom_vline(x=mErr, colour="blue4", size=2, alpha=0.4) +#
+	labs(title="Bismark %MET Distribution", x="%MET Calls", y="Count")#
+u
+u <- ggplot(data=D, aes(x=ObsMet)) +#
+	geom_histogram(colour="blue4", fill="green3", binwidth= 4) +#
+	scale_x_continuous(limits=c(0,100)) +#
+	#geom_vline(x=mErr, colour="blue4", size=2, alpha=0.4) +#
+	labs(title="Bismark %MET Distribution", x="%MET Calls", y="Count")#
+u
+u <- ggplot(data=D, aes(x=ObsMet)) +#
+	geom_histogram(colour="blue4", fill="green3", binwidth= 8) +#
+	scale_x_continuous(limits=c(0,100)) +#
+	#geom_vline(x=mErr, colour="blue4", size=2, alpha=0.4) +#
+	labs(title="Bismark %MET Distribution", x="%MET Calls", y="Count")#
+u
+u <- ggplot(data=D, aes(x=ObsMet)) +#
+	geom_histogram(colour="blue4", fill="green3", binwidth= 6) +#
+	scale_x_continuous(limits=c(0,100)) +#
+	#geom_vline(x=mErr, colour="blue4", size=2, alpha=0.4) +#
+	labs(title="Bismark %MET Distribution", x="%MET Calls", y="Count")#
+u
+u <- ggplot(data=D, aes(x=ObsMet)) +#
+	geom_histogram(colour="blue4", fill="green3", binwidth= 2) +#
+	scale_x_continuous(limits=c(0,100)) +#
+	#geom_vline(x=mErr, colour="blue4", size=2, alpha=0.4) +#
+	labs(title="Bismark %MET Distribution", x="%MET Calls", y="Count")#
+u
+u <- ggplot(data=D, aes(x=ObsMet)) +#
+	geom_histogram(colour="blue4", fill="green3", binwidth= 1) +#
+	scale_x_continuous(limits=c(0,100)) +#
+	#geom_vline(x=mErr, colour="blue4", size=2, alpha=0.4) +#
+	labs(title="Bismark %MET Distribution", x="%MET Calls", y="Count")#
+u
+u <- ggplot(data=D, aes(x=ObsMet)) +#
+	geom_histogram(colour="blue4", fill="green3", binwidth= 2) +#
+	scale_x_continuous(limits=c(0,100)) +#
+	#geom_vline(x=mErr, colour="blue4", size=2, alpha=0.4) +#
+	labs(title="Bismark %MET Distribution", x="%MET Calls", y="Count")#
+u
+ggsave(u, file=paste(workFolder,PlotTag1,"-",PlotTag2,"/","Rplot-%MET-distribution.png",sep=''), dpi=300)
+ggsave(u, file=paste(workFolder,PlotTag1,"-",PlotTag2,"/","Rplot-pMET-distribution.png",sep=''), dpi=300)
+s <- ggplot(data=D, aes(x=ObsMet, y=ExpMet) ) +#
+ 	 geom_point(aes(colour=ExpMet), size=3, alpha=1) +#
+ 	 scale_x_continuous("Bismark %MET") +#
+ 	 scale_y_continuous("Expected %MET") +#
+ 	 #geom_text(label=D$POS,size=2, hjust=0,vjust=0) +#
+ 	 #stat_smooth(method="lm", colour="red3", fill="grey20", size=0.5, alpha=0.5, formula = y ~ x) +#
+ 	 labs(title=paste(PlotTag2,": Bismark Scoring")) +#
+ 	 scale_colour_gradient("Expected %MET",low="orange", high="blue")#
+ 	 #facet_wrap(~GRP,scales="free_x")#
+ 	 # geom_text(data=eq,aes(x = 25, y = 300,label=V1), parse = TRUE, inherit.aes=FALSE)#
+s
+library(ggplot2)
+PlotTag1 <- c("02")#
+PlotTag2 <- c("0709")#
+workFolder <- c("002-Bismark/")
+D <- read.table(paste(workFolder,PlotTag1,"-",PlotTag2,"/SimMethylScoreTable-01-CpG-",PlotTag2,".txt",sep=''),sep='\t',header=T) #
+summary(D)
+s <- ggplot(data=D, aes(x=ObsMet, y=ExpMet) ) +#
+ 	 geom_point(aes(colour=ExpMet), size=3, alpha=1) +#
+ 	 scale_x_continuous("Bismark %MET") +#
+ 	 scale_y_continuous("Expected %MET") +#
+ 	 #geom_text(label=D$POS,size=2, hjust=0,vjust=0) +#
+ 	 #stat_smooth(method="lm", colour="red3", fill="grey20", size=0.5, alpha=0.5, formula = y ~ x) +#
+ 	 labs(title=paste(PlotTag2,": Bismark Scoring")) +#
+ 	 scale_colour_gradient("Expected %MET",low="orange", high="blue")#
+ 	 #facet_wrap(~GRP,scales="free_x")#
+ 	 # geom_text(data=eq,aes(x = 25, y = 300,label=V1), parse = TRUE, inherit.aes=FALSE)#
+s
+ggsave(s, file=paste(workFolder,PlotTag1,"-",PlotTag2,"/","Rplot-Exp-Obs-Bismark.png",sep=''), dpi=300)

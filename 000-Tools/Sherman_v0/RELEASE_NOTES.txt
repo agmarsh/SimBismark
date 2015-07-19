@@ -1,0 +1,94 @@
+RELEASE NOTES FOR SHERMAN v0.1.7 (11 Aug 2014)
+----------------------------------------------
+
+Fixed a 1-off length issue for sequences with variable length adapter
+contamination.
+
+
+
+RELEASE NOTES FOR SHERMAN v0.1.6 (09 Sep 2013)
+----------------------------------------------
+
+Fixed some bugs with the length of the quality string that were inadvertently
+introduced in the pervious releases. This includes sequences with too short
+quality strings as well as the correct location of simulated single-end reads
+which were 1bp too long.
+
+
+
+RELEASE NOTES FOR SHERMAN v0.1.5 (24 Jul 2013)
+----------------------------------------------
+
+Fixed a bug which generated a too long sequence in --CR 0 mode. Also, the
+quality scores are now are now also truncated by 1bp again so that the sequence
+and the quality score strings have the same length.
+
+
+
+RELEASE NOTES FOR SHERMAN v0.1.4 (11 Jul 2013)
+----------------------------------------------
+
+For context specific cytosine conversion, Sherman assumed for simplicity 
+that a C in the last position was in CH context. This did however cause
+a weird blip in the M-bias plots of simulated data at the end or read 1 and
+at the start of read 2. To account for this, Sherman does now internally 
+generate a sequence that is 1bp longer than intended, and shortens it again
+after the bisulfite conversion step. Eventually, this change should only 
+be noticable in an M-bias plot.
+
+
+
+RELEASE NOTES FOR SHERMAN v0.1.3 (18 Dec 2012)
+----------------------------------------------
+
+Changed the third line of basespace FastQ reads to be a "+" only, instead
+of printing the count (and read number) as this seems to crash other programs
+such as Cutadapt.
+
+
+
+RELEASE NOTES FOR SHERMAN v0.1.2 (05 Sep 2012)
+----------------------------------------------
+
+If reads are simulated from an existing genome, the genomic location of
+reads is printed into the read-ID line in addition to the read count number.
+This is to facilitate evaluations of different aligners.
+
+
+
+RELEASE NOTES FOR SHERMAN v0.1.1 (09 Jan 2012)
+----------------------------------------------
+
+The bisulfite conversion rate can now be any float number between
+0 and 100% (instead of integers only).
+
+When reading in the reference genome, Sherman does now delete \r line
+endings in addition to \n which could occur when the reference was 
+edited on a system such as Windows. Also, a "die" statement whenever
+a base other than A, C, T or G was encountered during the introduction
+of errors was changed into a warning instead (and an A will be introduced
+instead).
+
+Fixed a bug while generating non-directional paired-end libraries. This
+feature is now working as intended.
+
+
+
+RELEASE NOTES FOR SHERMAN v0.1.0 (15 Jul 2011)
+----------------------------------------------
+
+SHERMAN v0.1.0 is an initial beta release and as such is still a
+work in progress.
+
+We have successfully tested Sherman's  output to produce accurate
+methylation data and contaminants with Bismark and FastQC, for the 
+mouse and human genomes.
+
+We have initially designed Sherman to generate the kinds of library
+contaminations we were interested in, but if you have some ideas or
+suggestions which could be implemented we would love to hear from you.
+
+You can report feedback or bugs directly to:
+felix.krueger@babraham.ac.uk
+
+
