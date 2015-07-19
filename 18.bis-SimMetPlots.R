@@ -18,7 +18,7 @@ summary(D)
 
 # PLOT 01 --------------------------------------------------------------------------
 
-s <- ggplot(data=D, aes(x=ObsMet, y=ExpMet) ) +
+s <- ggplot(data=D, aes(x=ExpMet, y=ObsMet) ) +
  	 geom_point(aes(colour=ExpMet), size=3, alpha=1) +
  	 scale_x_continuous("Expected %MET") +
  	 scale_y_continuous("Bismark %MET") +
