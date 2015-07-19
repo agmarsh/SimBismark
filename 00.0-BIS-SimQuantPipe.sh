@@ -112,8 +112,8 @@ fi
 if [ $STEP2 = "1" ]; then
     echo "- - - - - - - - - - - - - - - - - - - - - - - - - -"
     echo "2. Prepare Genome File . . . "
-        $currDir/bismark_v0.13.0/bismark_genome_preparation \
-        --path_to_bowtie $currDir/bowtie2-2.2.4/ \
+        $currDir/000-Tools/bismark_v0.13.0/bismark_genome_preparation \
+        --path_to_bowtie $currDir/000-Tools/bowtie2-2.2.4/ \
         --bowtie2 \
         $simRefGenFolder/$SeqID-$TAG/01-Genome/  
 fi
@@ -128,16 +128,16 @@ if [ $STEP3 = "1" ]; then
     if [ ! -d 002-Bismark/$SeqID-$TAG/ ]; then
         mkdir -p 002-Bismark/$SeqID-$TAG/
     fi
-        $currDir/bismark_v0.13.0/bismark \
+        $currDir/000-Tools/bismark_v0.13.0/bismark \
         --fasta \
         --output_dir 002-Bismark/$SeqID-$TAG/ \
-        --path_to_bowtie $currDir/bowtie2-2.2.4/ \
+        --path_to_bowtie $currDir/000-Tools/bowtie2-2.2.4/ \
         --bowtie2 \
         $simRefGenFolder/$SeqID-$TAG/01-Genome/ \
         $simRefGenFolder/$SeqID-$TAG/03-BIS-SeqReadData-$readLen.fa
 fi
 
-#        --samtools_path $currDir/samtools-1.1/
+#        --samtools_path $currDir/000-Tools/samtools-1.1/
 #        --sam \
 #           --fastq
 #           --output_dir 002-Bismark/$TAG-$SeqID/ \
@@ -149,7 +149,7 @@ fi
 if [ $STEP4 = "1" ]; then
     echo "- - - - - - - - - - - - - - - - - - - - - - - - - -"
     echo "4. Running BISMARK Methylation Extractor . . . . "
-        $currDir/bismark_v0.13.0/bismark_methylation_extractor \
+        $currDir/000-Tools/bismark_v0.13.0/bismark_methylation_extractor \
         --single-end \
         --output 002-Bismark/$SeqID-$TAG/ \
         --bedGraph \
