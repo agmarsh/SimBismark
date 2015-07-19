@@ -8,11 +8,11 @@ print(args)
 
 PlotTag <- c(args[1])
 
-PlotTag1 <- c("02")
-PlotTag2 <- c("0709")
+PlotTag1 <- c("03")
+PlotTag2 <- c("0777")
 workFolder <- c("002-Bismark/")
 
-D <- read.table(paste(workFolder,PlotTag1,"-",PlotTag2,"/SimMethylScoreTable-01-CpG-",PlotTag2,".txt",sep=''),sep='\t',header=T) 
+D <- read.table(paste(workFolder,PlotTag1,"-",PlotTag2,"/11-BisSimMethylScoreTable-CpG-",PlotTag2,".txt",sep=''),sep='\t',header=T) 
 summary(D)
 
 
