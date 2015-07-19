@@ -32,6 +32,7 @@ loadMET=1 						# use an existing MET Table and 01-GenomeSequence.fa file; found
 loadRef="00-Hs37/Hs37-01-2MB.fa"   # location for a reference genome/chromosome for the alignment
 geneNumber=1                    # number of gene seqs in input refgen file to be used
 sizeSelect=150                  # minimum length retained during size selection for library synthesis
+currDir=`pwd`					# current directory of this script
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #                F L O W   C O N T R O L
@@ -111,8 +112,8 @@ fi
 if [ $STEP2 = "1" ]; then
     echo "- - - - - - - - - - - - - - - - - - - - - - - - - -"
     echo "2. Prepare Genome File . . . "
-        /usr/local/bismark_v0.13.0/bismark_genome_preparation \
-        --path_to_bowtie /usr/local/bowtie2-2.2.4/ \
+        $currDir/bismark_v0.13.0/bismark_genome_preparation \
+        --path_to_bowtie $currDir/bowtie2-2.2.4/ \
         --bowtie2 \
         $simRefGenFolder/$SeqID-$TAG/01-Genome/  
 fi
@@ -127,16 +128,16 @@ if [ $STEP3 = "1" ]; then
     if [ ! -d 002-Bismark/$SeqID-$TAG/ ]; then
         mkdir -p 002-Bismark/$SeqID-$TAG/
     fi
-        /usr/local/bismark_v0.13.0/bismark \
+        $currDir/bismark_v0.13.0/bismark \
         --fasta \
         --output_dir 002-Bismark/$SeqID-$TAG/ \
-        --path_to_bowtie /usr/local/bowtie2-2.2.4/ \
+        --path_to_bowtie $currDir/bowtie2-2.2.4/ \
         --bowtie2 \
         $simRefGenFolder/$SeqID-$TAG/01-Genome/ \
         $simRefGenFolder/$SeqID-$TAG/03-BIS-SeqReadData-$readLen.fa
 fi
 
-#        --samtools_path /usr/local/samtools-1.1/
+#        --samtools_path $currDir/samtools-1.1/
 #        --sam \
 #           --fastq
 #           --output_dir 002-Bismark/$TAG-$SeqID/ \
@@ -148,7 +149,7 @@ fi
 if [ $STEP4 = "1" ]; then
     echo "- - - - - - - - - - - - - - - - - - - - - - - - - -"
     echo "4. Running BISMARK Methylation Extractor . . . . "
-        /usr/local/bismark_v0.13.0/bismark_methylation_extractor \
+        $currDir/bismark_v0.13.0/bismark_methylation_extractor \
         --single-end \
         --output 002-Bismark/$SeqID-$TAG/ \
         --bedGraph \
