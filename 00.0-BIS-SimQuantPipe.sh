@@ -76,7 +76,7 @@ if [ $STEPALL = "1" ]; then
 	STEP3=1          # 
 	STEP4=1          # 
 	STEP5=1          # 
-	STEP6=0          # 
+	STEP6=1          # 
 fi
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
