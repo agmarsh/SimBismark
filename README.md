@@ -18,4 +18,4 @@ Perl module GD::Graph::lines
 
 Perl module GD::Graph::pie
 
-Modified July 19, 2015 MTC
+Contributed July 19, 2015 MTC
