@@ -1,6 +1,6 @@
 # SimBismark
 
-Pipeline for Analysis of SIMULATED methyl-DNA seq reads.
+Pipeline for analysis of SIMULATED methyl-DNA seq reads.
 
 AGM-2014
 
