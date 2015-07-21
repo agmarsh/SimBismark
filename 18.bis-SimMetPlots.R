@@ -1,20 +1,14 @@
 
 library(ggplot2)
+# Correlations with significance levels
+library(Hmisc)
+
+
 args <- commandArgs(trailingOnly = FALSE)
-
-#args &lt;- commandArgs()
-print(args)
-
 #print(args)
 
 #-------------------- User Variables --------------------
 #rm(list=ls())
-
-#PlotTag <- c(args[1])
-
-#PlotTag1 <- c("04")
-#PlotTag2 <- c("0720")
-#workFolder <- c("002-Bismark/")
 
 PlotTag1 <- args[7]
 PlotTag2 <- args[8]
@@ -22,6 +16,20 @@ workFolder <- args[9]
 
 D <- read.table(paste(workFolder,PlotTag1,"-",PlotTag2,"/11-BisSimMethylScoreTable-CpG-",PlotTag2,".txt",sep=''),sep='\t',header=T) 
 summary(D)
+
+# LINEAR MODEL -------------------------------------------------------------------
+df <- data.frame(obs = as.vector(D$ObsMet), exp = as.vector(D$ExpMet))
+fit = lm(obs ~ exp, data = df)
+summary(fit)
+
+#str(summary(met.mod1))
+
+rSquared <- signif(summary(fit)$r.squared, digits = 4)
+print("R-squared = ")
+rSquared
+adjrSquared <- signif(summary(fit)$adj.r.squared, digits = 4)
+print("Adjusted R-squared = ")
+adjrSquared
 
 
 # PLOT 01 --------------------------------------------------------------------------
@@ -33,9 +41,11 @@ s <- ggplot(data=D, aes(x=ExpMet, y=ObsMet) ) +
  	 #geom_text(label=D$POS,size=2, hjust=0,vjust=0) +
  	 #stat_smooth(method="lm", colour="red3", fill="grey20", size=0.5, alpha=0.5, formula = y ~ x) +
  	 labs(title=paste(PlotTag2,": Bismark Scoring")) +
+ 	 annotate("text", x = 50, y = 105, label = paste("Adjusted R-squared = ", adjrSquared)) +
  	 scale_colour_gradient("Expected %MET",low="orange", high="blue")
  	 #facet_wrap(~GRP,scales="free_x")
  	 # geom_text(data=eq,aes(x = 25, y = 300,label=V1), parse = TRUE, inherit.aes=FALSE)
+
 s
 
 ggsave(s, file=paste(workFolder,PlotTag1,"-",PlotTag2,"/","Rplot-Exp-Obs-Bismark.png",sep=''), dpi=300)
@@ -53,7 +63,39 @@ ggsave(u, file=paste(workFolder,PlotTag1,"-",PlotTag2,"/","Rplot-pMET-distributi
 
 # MODEL REGRESSION --------------------------------------------------------------------------
 
-cor(D$ObsMet,D$ExpMet)
+print("Correlation coefficient -------------------------------")
+#cor(D$ObsMet,D$ExpMet)
+
+#create the matrix
+#theCorr <-rcorr(D$ObsMet,D$ExpMet, type="pearson") # type can be pearson or spearman
+
+#print("rcorr result------------")
+#theCorr[1]
+#theCorr[2]
+#theCorr[3]
+
+#print("cor.test result--------------")
+#test <- cor.test(D$ObsMet,D$ExpMet)
+#test
+
+#t = test$statistic
+#t
+#df = test$parameter
+#df
+#pvalue = test$p.value
+#pvalue
+#corr = test$estimate
+#corr
+#null = test$null.value
+#null
+#alt = test$alternative
+#alt
+#meth = test$method
+#meth
+#data = test$data.name
+#data
+#interval = test$conf.int
+#interval
 
 # D$Dev <- abs(D$Obs - D$pMET)/(D$pMET)
 D$logObs <- log10(D$ObsMet+100)
@@ -64,7 +106,6 @@ D$Dev <- 10^(100*(D$logDev))
 qDev <- quantile(D$Dev, probs=c(0.20, 0.25, 0.5, 0.75, 0.95), na.rm=TRUE)
 qDev
 mErr = round(qDev[3],2)
-
 
 u <- ggplot(data=D, aes(x=Dev)) +
 	geom_histogram(colour="blue4", fill="green3", binwidth= 0.60) +
@@ -85,8 +126,6 @@ ggsave(u, file=paste(workFolder,PlotTag1,"-",PlotTag2,"/","Rplot-SimMethyl-Error
 #	#stat_smooth(method="lm", colour="red3", fill="grey40", size=1, alpha=0.5, formula = y ~ x) 
 ##w
 #ggsave(w, file=paste(workFolder,PlotTag1,"-",PlotTag2,"/","Rplot-SimMethyl-OBS-vs-EXP.png",dpi=300)
-
-
 
 #--------------------------------------------------------------------------
 #--------------------------------------------------------------------------
