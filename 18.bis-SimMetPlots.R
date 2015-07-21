@@ -8,8 +8,8 @@ print(args)
 
 PlotTag <- c(args[1])
 
-PlotTag1 <- c("03")
-PlotTag2 <- c("0777")
+PlotTag1 <- c("04")
+PlotTag2 <- c("0720")
 workFolder <- c("002-Bismark/")
 
 D <- read.table(paste(workFolder,PlotTag1,"-",PlotTag2,"/11-BisSimMethylScoreTable-CpG-",PlotTag2,".txt",sep=''),sep='\t',header=T) 
@@ -36,7 +36,7 @@ ggsave(s, file=paste(workFolder,PlotTag1,"-",PlotTag2,"/","Rplot-Exp-Obs-Bismark
 # PLOT 02 --------------------------------------------------------------------------
 u <- ggplot(data=D, aes(x=ObsMet)) +
 	geom_histogram(colour="blue4", fill="green3", binwidth= 2) +
-	scale_x_continuous(limits=c(0,100)) +
+	scale_x_continuous(limits=c(0,102)) +
 	#geom_vline(x=mErr, colour="blue4", size=2, alpha=0.4) +
 	labs(title="Bismark %MET Distribution", x="%MET Calls", y="Count")
 u
