@@ -1,6 +1,9 @@
 
 library(ggplot2)
-args <- commandArgs(trailingOnly = TRUE)
+args <- commandArgs(trailingOnly = FALSE)
+
+#args &lt;- commandArgs()
+print(args)
 
 #print(args)
 
@@ -13,9 +16,9 @@ args <- commandArgs(trailingOnly = TRUE)
 #PlotTag2 <- c("0720")
 #workFolder <- c("002-Bismark/")
 
-PlotTag1 <- args[1]
-PlotTag2 <- args[2]
-workFolder <- args[3]
+PlotTag1 <- args[7]
+PlotTag2 <- args[8]
+workFolder <- args[9]
 
 D <- read.table(paste(workFolder,PlotTag1,"-",PlotTag2,"/11-BisSimMethylScoreTable-CpG-",PlotTag2,".txt",sep=''),sep='\t',header=T) 
 summary(D)

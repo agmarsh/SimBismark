@@ -34,8 +34,8 @@ import string     # use maketrans and translate
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # - - - - - - -   U S E R    V A R I A B L E S  - - - - - - - - - - - - - - - - -
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-ID 	  		= "01"                      # file prefix for simulated genome output
-TAG       	= "0704"                    # unique ID str for folders/files
+ID 	  		= "03"                      # file prefix for simulated genome output
+TAG       	= "0720"                    # unique ID str for folders/files
 gMBsize   	= 2                         # genome size (MB)
 genCopyNum	= 100                       # number of genome copies (each with different MET patterns)
 seqCycles 	= 1                     	# sequencing cycles (depth of frag sampling to generateseqreads)
@@ -109,6 +109,7 @@ datafile    =  runfolder + "03-BIS-SeqReadData-%s.fa" % (str(readLen))
 bisMetTable =  runfolder + "04-BIS-MetCountDataTable.txt" 
 
 runlog =  runfolder + "00-runlog.txt"
+
 WIPE = open(datafile,"w")
 WIPE.close()
 WIPE = open(bisMetTable,"w")
@@ -174,6 +175,7 @@ def ReadFasta(file):
 				elif loadMET == 0:
 					# Parse header line for HS37.fnt files . . . .
 					d = line.split('|')
+					DUMP("GenFile = %s\n" %(GenFile))
 					pos = int(d[7]) - 3000
 					headermatch = re.match(r'^Hs\d\d\-', d[0])
 					if headermatch is None:
@@ -218,6 +220,8 @@ def ReadFasta(file):
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
 DUMP("\n\nRunning Genome Seq Tag Construction Set: ID = %s\n\n" % (ID))
+
+DUMP("GenFile = %s\n" %(GenFile))
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # . . . . . Generate the DNA sequence . . . . . . .

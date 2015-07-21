@@ -178,7 +178,20 @@ if [ $STEP6 = "1" ]; then
     #R CMD BATCH --no-save --no-restore '--args PlotTag1=$Tag PlotTag2=$SeqID workFolder="002-Bismark/"' 18.bis-SimMetPlots.R &
     
     #R --vanilla < 18.bis-SimMetPlots.R --args 04 0720 002-Bismark/
-    R --vanilla < 18.bis-SimMetPlots.R --args $Tag $seqID "002-Bismark/"
+    #R --vanilla < 18.bis-SimMetPlots.R --args $Tag $seqID 002-Bismark/
+    
+    #from subprocess import call
+	#call(["R --vanilla < 18.bis-SimMetPlots.R --args $Tag $seqID 002-Bismark/"])
+    
+    
+    #Rscript --vanilla 18.bis-SimMetPlots.R 04 0720 002-Bismark/
+    Rscript --vanilla 18.bis-SimMetPlots.R $SeqID $TAG "002-Bismark/"
+    
+    #import subprocess
+	#subprocess.call(['./test.sh'])
+	#retcode = subprocess.call(['/usr/bin/Rscript', '/Users/cottrell/Documents/Science/Projects/GenPro/SimBismark/18.bis-SimMetPlots.R'])
+    
+    #os.system("R --vanilla < 18.bis-SimMetPlots.R --args $Tag $seqID "002-Bismark/"")
     
     #cp 18.bis-SimMetPlots.R 002-Bismark/$TAG-$SeqID/
     #cd 002-Bismark/$TAG-$SeqID/
