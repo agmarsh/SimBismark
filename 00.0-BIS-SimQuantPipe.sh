@@ -16,8 +16,8 @@
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 #                R U N T I M E   V A R S
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-SeqID="03"                      # file prefix for simulated genome output
-TAG="0777"                      # unique ID str for folders/files
+SeqID="04"                      # file prefix for simulated genome output
+TAG="0720"                      # unique ID str for folders/files
 gMBsize=252                     # genome size (MB)
 genCopyNum=100                  # number of genome copies (each with different MET patterns)
 seqCycles=1                     # sequencing cycles (depth of frag sampling to generate seq reads)
