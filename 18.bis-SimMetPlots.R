@@ -1,16 +1,21 @@
 
 library(ggplot2)
 args <- commandArgs(trailingOnly = TRUE)
-print(args)
+
+#print(args)
 
 #-------------------- User Variables --------------------
 #rm(list=ls())
 
-PlotTag <- c(args[1])
+#PlotTag <- c(args[1])
 
-PlotTag1 <- c("04")
-PlotTag2 <- c("0720")
-workFolder <- c("002-Bismark/")
+#PlotTag1 <- c("04")
+#PlotTag2 <- c("0720")
+#workFolder <- c("002-Bismark/")
+
+PlotTag1 <- args[1]
+PlotTag2 <- args[2]
+workFolder <- args[3]
 
 D <- read.table(paste(workFolder,PlotTag1,"-",PlotTag2,"/11-BisSimMethylScoreTable-CpG-",PlotTag2,".txt",sep=''),sep='\t',header=T) 
 summary(D)

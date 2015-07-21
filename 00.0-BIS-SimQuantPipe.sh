@@ -39,14 +39,14 @@ currDir=`pwd`					# current directory of this script
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # 0 = NO, do not execute this step . . .
 # 1 = YES, execute this step . . . . .
-STEPALL=1        # Set all flags to 1 before entering pipe
-STEP0=1          # Generate Simulated SeqRead data files
+STEPALL=0       # Set all flags to 1 before entering pipe
+STEP0=0          # Generate Simulated SeqRead data files
 STEP1=0          # File/folder prep
 STEP2=0          # BISMARK genome prep
 STEP3=0          # BISMARK
 STEP4=0          # BISMARK methylation extractor 
 STEP5=0          # Prep data tables for R
-STEP6=0          # Run R script for OBS vs EXP analysis
+STEP6=1          # Run R script for OBS vs EXP analysis
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -173,11 +173,17 @@ fi
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 if [ $STEP6 = "1" ]; then
     echo "- - - - - - - - - - - - - - - - - - - - - - - - - -"
-    echo "8. Generate R plots . . . . . "
-    cp 18.bis-SimMetPlots.R 002-Bismark/$TAG-$SeqID/
-    cd 002-Bismark/$TAG-$SeqID/
-    R --vanilla <18.bis-SimMetPlots.R --args $TAG  
-    cd ../..
+    echo "6. Generate R plots . . . . . "
+    #R CMD BATCH --no-save --no-restore '--args PlotTag1=$Tag PlotTag2=$SeqID workFolder="002-Bismark/"' 18.bis-SimMetPlots.R &
+    #R CMD BATCH --no-save --no-restore '--args PlotTag1=$Tag PlotTag2=$SeqID workFolder="002-Bismark/"' 18.bis-SimMetPlots.R &
+    
+    #R --vanilla < 18.bis-SimMetPlots.R --args 04 0720 002-Bismark/
+    R --vanilla < 18.bis-SimMetPlots.R --args $Tag $seqID "002-Bismark/"
+    
+    #cp 18.bis-SimMetPlots.R 002-Bismark/$TAG-$SeqID/
+    #cd 002-Bismark/$TAG-$SeqID/
+    #R --vanilla <18.bis-SimMetPlots.R --args $TAG  
+    #cd ../..
     
 fi
 
