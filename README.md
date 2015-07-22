@@ -12,6 +12,8 @@ R
 
 R library ggplot2
 
+R library Hmisc
+
 Perl
 
 Perl module GD::Graph::lines
