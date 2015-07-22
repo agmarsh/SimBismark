@@ -1181,7 +1181,7 @@ VERSION
     }
   }
   else{
-    $multicore = 1; # default. Single-thread mode
+    $multicore = 4; # default. Single-thread mode
     warn "Setting core usage to single-threaded (default). Consider using --multicore <int> to speed up the extraction process.\n\n";
   }
 

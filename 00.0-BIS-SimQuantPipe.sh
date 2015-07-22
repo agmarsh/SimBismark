@@ -16,10 +16,10 @@
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 #                R U N T I M E   V A R S
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-SeqID="04"                      # file prefix for simulated genome output
-TAG="0720"                      # unique ID str for folders/files
+SeqID="08"                      # file prefix for simulated genome output
+TAG="1000"                      # unique ID str for folders/files
 gMBsize=252                     # genome size (MB)
-genCopyNum=100                  # number of genome copies (each with different MET patterns)
+genCopyNum=1000                  # number of genome copies (each with different MET patterns)
 seqCycles=1                     # sequencing cycles (depth of frag sampling to generate seq reads)
 readLen=76                      # sequence read length for each tag
 simRefGenFolder="001-RefGenome"   # use if working from project folder with the 00.0-SimQuantPipe.sh script
@@ -39,14 +39,14 @@ currDir=`pwd`					# current directory of this script
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # 0 = NO, do not execute this step . . .
 # 1 = YES, execute this step . . . . .
-STEPALL=0       # Set all flags to 1 before entering pipe
+STEPALL=1       # Set all flags to 1 before entering pipe
 STEP0=0          # Generate Simulated SeqRead data files
 STEP1=0          # File/folder prep
 STEP2=0          # BISMARK genome prep
 STEP3=0          # BISMARK
 STEP4=0          # BISMARK methylation extractor 
 STEP5=0          # Prep data tables for R
-STEP6=1          # Run R script for OBS vs EXP analysis
+STEP6=0          # Run R script for OBS vs EXP analysis
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -174,29 +174,8 @@ fi
 if [ $STEP6 = "1" ]; then
     echo "- - - - - - - - - - - - - - - - - - - - - - - - - -"
     echo "6. Generate R plots . . . . . "
-    #R CMD BATCH --no-save --no-restore '--args PlotTag1=$Tag PlotTag2=$SeqID workFolder="002-Bismark/"' 18.bis-SimMetPlots.R &
-    #R CMD BATCH --no-save --no-restore '--args PlotTag1=$Tag PlotTag2=$SeqID workFolder="002-Bismark/"' 18.bis-SimMetPlots.R &
     
-    #R --vanilla < 18.bis-SimMetPlots.R --args 04 0720 002-Bismark/
-    #R --vanilla < 18.bis-SimMetPlots.R --args $Tag $seqID 002-Bismark/
-    
-    #from subprocess import call
-	#call(["R --vanilla < 18.bis-SimMetPlots.R --args $Tag $seqID 002-Bismark/"])
-    
-    
-    #Rscript --vanilla 18.bis-SimMetPlots.R 04 0720 002-Bismark/
     Rscript --vanilla 18.bis-SimMetPlots.R $SeqID $TAG "002-Bismark/"
-    
-    #import subprocess
-	#subprocess.call(['./test.sh'])
-	#retcode = subprocess.call(['/usr/bin/Rscript', '/Users/cottrell/Documents/Science/Projects/GenPro/SimBismark/18.bis-SimMetPlots.R'])
-    
-    #os.system("R --vanilla < 18.bis-SimMetPlots.R --args $Tag $seqID "002-Bismark/"")
-    
-    #cp 18.bis-SimMetPlots.R 002-Bismark/$TAG-$SeqID/
-    #cd 002-Bismark/$TAG-$SeqID/
-    #R --vanilla <18.bis-SimMetPlots.R --args $TAG  
-    #cd ../..
     
 fi
 

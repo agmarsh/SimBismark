@@ -22,15 +22,19 @@ df <- data.frame(obs = as.vector(D$ObsMet), exp = as.vector(D$ExpMet))
 fit = lm(obs ~ exp, data = df)
 summary(fit)
 
-#str(summary(met.mod1))
+str(summary(fit))
 
 rSquared <- signif(summary(fit)$r.squared, digits = 4)
 print("R-squared = ")
 rSquared
+
 adjrSquared <- signif(summary(fit)$adj.r.squared, digits = 4)
 print("Adjusted R-squared = ")
 adjrSquared
 
+df <- signif(summary(fit)$df[2], digits = 4)
+print("df = ")
+df
 
 # PLOT 01 --------------------------------------------------------------------------
 
@@ -42,6 +46,7 @@ s <- ggplot(data=D, aes(x=ExpMet, y=ObsMet) ) +
  	 #stat_smooth(method="lm", colour="red3", fill="grey20", size=0.5, alpha=0.5, formula = y ~ x) +
  	 labs(title=paste(PlotTag2,": Bismark Scoring")) +
  	 annotate("text", x = 50, y = 105, label = paste("Adjusted R-squared = ", adjrSquared)) +
+ 	 annotate("text", x = 50, y = 95, label = paste("df = ", df)) +
  	 scale_colour_gradient("Expected %MET",low="orange", high="blue")
  	 #facet_wrap(~GRP,scales="free_x")
  	 # geom_text(data=eq,aes(x = 25, y = 300,label=V1), parse = TRUE, inherit.aes=FALSE)
