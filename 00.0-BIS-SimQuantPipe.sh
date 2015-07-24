@@ -17,9 +17,9 @@
 #                R U N T I M E   V A R S
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 SeqID="09"                      # file prefix for simulated genome output
-TAG="3000"                      # unique ID str for folders/files
+TAG="0030"                      # unique ID str for folders/files
 gMBsize=252                     # genome size (MB)
-genCopyNum=3000                  # number of genome copies (each with different MET patterns)
+genCopyNum=30                  # number of genome copies (each with different MET patterns)
 seqCycles=1                     # sequencing cycles (depth of frag sampling to generate seq reads)
 readLen=76                      # sequence read length for each tag
 simRefGenFolder="001-RefGenome"   # use if working from project folder with the 00.0-SimQuantPipe.sh script
