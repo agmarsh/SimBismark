@@ -38,7 +38,7 @@ ID 	  		= "03"                      # file prefix for simulated genome output
 TAG       	= "0720"                    # unique ID str for folders/files
 gMBsize   	= 2                         # genome size (MB)
 genCopyNum	= 100                       # number of genome copies (each with different MET patterns)
-seqCycles 	= 1                     	# sequencing cycles (depth of frag sampling to generateseqreads)
+depthFragSampling 	= 1                     	# sequencing cycles (depth of frag sampling to generateseqreads)
 readLen 	= 76                      	# sequence read length for each tag
 runfolder	= "001-RefGenome"           # use if working from project folder with the 00.0-SimQuantPipe.sh script
 ReadGenFile = 1				    		# 0 = generate DNA seq; 1 = read DNA seq from an input file
@@ -69,7 +69,7 @@ if len(sys.argv) > 1:
 	TAG         = sys.argv[2]
 	gMBsize     = float(sys.argv[3])            
 	genCopyNum  = int(sys.argv[4]) 
-	seqCycles   = int(sys.argv[5]) 
+	depthFragSampling   = int(sys.argv[5]) 
 	readLen     = int(sys.argv[6])  
 	runfolder   = sys.argv[7] 
 	ReadGenFile = int(sys.argv[8])
@@ -424,7 +424,7 @@ for (id,fragSeq) in refGEN.iteritems():
 		# - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 		# - - - Sampling Loop to provide coverage depth for Msp cuts 
 		# - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-		for i in xrange(seqCycles):
+		for i in xrange(depthFragSampling):
 			# Shear Msp frags - - - - - - -
 			Shear = []
 			for msp in Msp1:
@@ -476,7 +476,7 @@ for (id,fragSeq) in refGEN.iteritems():
 		if shearToss > 0:
 			interval = 2
 			shift = 10
-			for i in xrange(seqCycles):
+			for i in xrange(depthFragSampling):
 				Shear = []
 				# POSTIVE STRAND . . . . . . . 
 				# add the ends and tail . . . . . . . .

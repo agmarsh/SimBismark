@@ -10,7 +10,7 @@
 #   for comparison to a GenPro seqread set, then the runtime variables need to be
 #   matched to the comparative set:
 #       genCopyNum . . . . epigenetic sequence complexity in sample pool
-#       seqCycles  . . . . max potential read representation
+#       depthFragSampling  . . . . max potential read representation
 #       REtoss . . . . . probability of a frag being sequenced
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
@@ -20,7 +20,7 @@ SeqID="10"                      # file prefix for simulated genome output
 TAG="0001"                      # unique ID str for folders/files
 gMBsize=252                     # genome size (MB)
 genCopyNum=30                  # number of genome copies (each with different MET patterns)
-seqCycles=1                     # sequencing cycles (depth of frag sampling to generate seq reads)
+depthFragSampling=1                     # sequencing cycles (depth of frag sampling to generate seq reads)
 readLen=76                      # sequence read length for each tag
 simRefGenFolder="001-RefGenome"   # use if working from project folder with the 00.0-SimQuantPipe.sh script
 ReadGenFile=1                   # 0 = generate DNA seq; 1 = read DNA seq from an input file
@@ -89,7 +89,7 @@ if [ $STEP0 = "1" ]; then
         mkdir -p $simRefGenFolder/$SeqID-$TAG
     fi
     head -n 40 00.0-BIS-SimQuantPipe.sh > $simRefGenFolder/$SeqID-$TAG/00-RunConfig.txt
-    python 10.1-GenerateBisulfiteSeqTagData.py $SeqID $TAG $gMBsize $genCopyNum $seqCycles $readLen $simRefGenFolder $ReadGenFile $fracBIS $fastQ $REtoss $shearToss $loadMET $loadRef $sizeSelect $geneNumber
+    python 10.1-GenerateBisulfiteSeqTagData.py $SeqID $TAG $gMBsize $genCopyNum $depthFragSampling $readLen $simRefGenFolder $ReadGenFile $fracBIS $fastQ $REtoss $shearToss $loadMET $loadRef $sizeSelect $geneNumber
 	echo "- - - - - - - - - - - - - - - - - - - - - - - - - -" >> $simRefGenFolder/$SeqID-$TAG/00-RunConfig.txt
 	echo "Number of simulated sequences generated"  >> $simRefGenFolder/$SeqID-$TAG/00-RunConfig.txt
 	grep -c ">" $simRefGenFolder/$SeqID-$TAG/03-BIS-SeqReadData-76.fa >> $simRefGenFolder/$SeqID-$TAG/00-RunConfig.txt
