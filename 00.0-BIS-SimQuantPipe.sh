@@ -16,8 +16,8 @@
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 #                R U N T I M E   V A R S
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-SeqID="09"                      # file prefix for simulated genome output
-TAG="0030"                      # unique ID str for folders/files
+SeqID="10"                      # file prefix for simulated genome output
+TAG="0001"                      # unique ID str for folders/files
 gMBsize=252                     # genome size (MB)
 genCopyNum=30                  # number of genome copies (each with different MET patterns)
 seqCycles=1                     # sequencing cycles (depth of frag sampling to generate seq reads)
@@ -90,6 +90,11 @@ if [ $STEP0 = "1" ]; then
     fi
     head -n 40 00.0-BIS-SimQuantPipe.sh > $simRefGenFolder/$SeqID-$TAG/00-RunConfig.txt
     python 10.1-GenerateBisulfiteSeqTagData.py $SeqID $TAG $gMBsize $genCopyNum $seqCycles $readLen $simRefGenFolder $ReadGenFile $fracBIS $fastQ $REtoss $shearToss $loadMET $loadRef $sizeSelect $geneNumber
+	echo "- - - - - - - - - - - - - - - - - - - - - - - - - -" >> $simRefGenFolder/$SeqID-$TAG/00-RunConfig.txt
+	echo "Number of simulated sequences generated"  >> $simRefGenFolder/$SeqID-$TAG/00-RunConfig.txt
+	grep -c ">" $simRefGenFolder/$SeqID-$TAG/03-BIS-SeqReadData-76.fa >> $simRefGenFolder/$SeqID-$TAG/00-RunConfig.txt
+	echo "- - - - - - - - - - - - - - - - - - - - - - - - - -" >> $simRefGenFolder/$SeqID-$TAG/00-RunConfig.txt
+
 fi
 
 #  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
