@@ -64,18 +64,18 @@ for nt in ["A", "C", "G", "T"]:
 	pNT += ("%s " % nt) * fq
 
 if len(sys.argv) > 1:
-	# for ag in sys.argv: print ag
+	for ag in sys.argv: print ag
 	ID          = sys.argv[1]
 	TAG         = sys.argv[2]
 	gMBsize     = float(sys.argv[3])            
 	genCopyNum  = int(sys.argv[4]) 
-	depthFragSampling   = int(sys.argv[5]) 
+	depthFragSampling  = int(sys.argv[5]) 
 	readLen     = int(sys.argv[6])  
 	runfolder   = sys.argv[7] 
 	ReadGenFile = int(sys.argv[8])
 	fracBIS     = int(sys.argv[9])
 	fastQ       = int(sys.argv[10])
-	REtoss    = int(sys.argv[11]) 
+	REtoss    = float(sys.argv[11]) 
 	shearToss   = int(sys.argv[12])
 	loadMET     = int(sys.argv[13])
 	loadRef     = sys.argv[14]

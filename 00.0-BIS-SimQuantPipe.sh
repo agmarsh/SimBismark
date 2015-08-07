@@ -16,20 +16,20 @@
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 #                R U N T I M E   V A R S
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-SeqID="10"                      # file prefix for simulated genome output
+SeqID="11"                      # file prefix for simulated genome output
 TAG="0001"                      # unique ID str for folders/files
 gMBsize=252                     # genome size (MB)
-genCopyNum=30                  # number of genome copies (each with different MET patterns)
-depthFragSampling=1                     # sequencing cycles (depth of frag sampling to generate seq reads)
+genCopyNum=2000000            # number of genome copies (each with different MET patterns)
+depthFragSampling=1             # sequencing cycles (depth of frag sampling to generate seq reads)
 readLen=76                      # sequence read length for each tag
-simRefGenFolder="001-RefGenome"   # use if working from project folder with the 00.0-SimQuantPipe.sh script
+simRefGenFolder="001-RefGenome" # use if working from project folder with the 00.0-SimQuantPipe.sh script
 ReadGenFile=1                   # 0 = generate DNA seq; 1 = read DNA seq from an input file
 fracBIS=99                      # percent efficiency of bisulfite conversion chemistry
 fastQ=0                         # 0=fasta; 1 = fastQ format with phred scores
-REtoss=100                      # % probability of a RE frag in the sample population being sequenced
-shearToss=5                     # % probability of a sheared frag being sequenced
+REtoss=0.01                      # % probability of a RE frag in the sample population being sequenced
+shearToss=100                  # % probability of a sheared frag being sequenced
 loadMET=1 						# use an existing MET Table and 01-GenomeSequence.fa file; found in ..001-RefGenome/$ID-$TAG/
-loadRef="00-Hs37/Hs37-01-2MB.fa"   # location for a reference genome/chromosome for the alignment
+loadRef="00-Hs37/Hs37-01-2MB.fa" # location for a reference genome/chromosome for the alignment
 geneNumber=1                    # number of gene seqs in input refgen file to be used
 sizeSelect=150                  # minimum length retained during size selection for library synthesis
 currDir=`pwd`					# current directory of this script
